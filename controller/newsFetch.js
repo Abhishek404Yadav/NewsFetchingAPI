@@ -1,4 +1,5 @@
-const { default: axios } = require("axios");
+
+const axios = require("axios");
 
 function fetchNews(url) {
   return axios.get(url);

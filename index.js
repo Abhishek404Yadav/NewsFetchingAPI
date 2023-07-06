@@ -21,7 +21,7 @@ app.use(bodyParser.json());
 app.use("/api/register", register);
 app.use("/api/login", login);
 app.use("/api/preferences", preferences);
-app.use("api/news", news);
+app.use("/api/news", news);
 
 const PORT = 3000;
 

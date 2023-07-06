@@ -6,7 +6,7 @@ routes.post("/", (req, res) => {
   const user = new User({
     fullName: req.body.fullName,
     email: req.body.email,
-    preference: req.body.preference,
+    preferences: req.body.preferences,
     password: bcrypt.hashSync(req.body.password, 5),
   });
 

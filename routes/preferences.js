@@ -14,7 +14,7 @@ routes
         message: req.message,
       });
     }
-    const preferences = user.preferences;
+    const preferences = req.user.preferences ||[];
     res.status(200).json({ preferences });
   })
   .put(verifyToken, (req, res) => {
