@@ -1,11 +1,15 @@
 const mongoose = require("mongoose");
-const URI = process.env.MONGO_URI;
 
 const connectDB = async () => {
-  const con = await mongoose.connect(URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
-  console.log(`cloud is connected to ${con.connection.host}`);
+  try {
+    await mongoose.connect("mongodb://localhost:27017/usersdb", {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log(`Connected to the database`);
+  } catch (error) {
+    console.error("Error connecting to the database:", error);
+  }
 };
+
 module.exports = connectDB;

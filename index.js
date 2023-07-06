@@ -14,7 +14,8 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-connectDB();
+ connectDB();
+
 //Endpoint Handling
 
 app.use("/api/register", register);
