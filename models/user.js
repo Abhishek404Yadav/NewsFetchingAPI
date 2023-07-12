@@ -1,31 +1,14 @@
-var mongoose = require("mongoose"),
-  Schema = mongoose.Schema;
+const Joi = require('joi');
+const mongoose = require("mongoose");
 
-var userSchema = new Schema({
-  fullName: {
-    type: String,
-    required: [true, "fullname not provided "],
-  },
-  email: {
-    type: String,
-    unique: [true, "email already exists in database!"],
-    lowercase: true,
-    trim: true,
-    required: [true, "email not provided"],
-    validate: {
-      validator: function (v) {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
-      },
-      message: "{VALUE} is not a valid email!",
-    },
-  },
-  preferences: {
-    type: [String],
-    required: true,
-  },
+const Schema = mongoose.Schema;
+const userSchema = new Schema({
+  fullName: String,
+  email: String,
+  preferences: [String],
   password: {
     type: String,
-    required: true,
+    required : true,
   },
   created: {
     type: Date,
@@ -33,4 +16,17 @@ var userSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model("User", userSchema);
+
+const User = mongoose.model("User", userSchema);
+
+const joiValidate = (obj) => {
+  const schema = Joi.object({
+    fullName: Joi.string().regex(/^[a-zA-Z ]{1,20}$/).required(),
+    email: Joi.string().trim().lowercase().email().required(),
+    preferences: Joi.array().items(Joi.string()).required(),
+    password: Joi.string().required(),
+    created: Joi.date(),
+  });
+  return schema.validate(obj);
+};
+module.exports = {User,joiValidate}
