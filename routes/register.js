@@ -1,6 +1,7 @@
 var bcrypt = require("bcrypt");
 const routes = require("express").Router();
-const { User, joiValidate } = require("../models/user"); // Replace "./path/to/userSchema" with the actual path to your user schema module
+const  User = require("../models/user");
+const joiValidate= require("../validator/joiValidate")
 
 routes.post("/", (req, res) => {
   const { error, value } = joiValidate(req.body); // Validate request body using Joi schema
