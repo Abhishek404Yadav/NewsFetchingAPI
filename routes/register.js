@@ -17,9 +17,9 @@ routes.post("/", (req, res) => {
   };
 
   // Create a new user using the User model
-  const newUser = new User(userInfo);
+  const user = new User(userInfo);
 
-  newUser.save()
+  user.save()
     .then(() => {
       res.status(200).json({ message: "User created successfully" });
     })
