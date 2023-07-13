@@ -15,7 +15,7 @@ routes
       });
     }
     const preferences = req.user.preferences ||[];
-    res.status(200).json({ preferences });
+    res.status(200).send({ preferences });
   })
   .put(verifyToken, (req, res) => {
     if (!req.user && req.message == null) {

@@ -1,13 +1,13 @@
 const expect = require("chai").expect;
 const joiValidate = require("../../validator/joiValidate");
 
-const obj={
-    fullName: "Abhishek",
-    email: "abhiyadav.ce@gmail.com",
-    preferences: ["tesla","meta","google"],
-    password:"Abhi@1332",
-}
 describe("Checking Joi Module validator",function(){
+    const obj={
+        fullName: "Abhishek",
+        email: "abhiyadav.ce@gmail.com",
+        preferences: ["tesla","meta","google"],
+        password:"Abhi@1332",
+    }
     it('1. should validate the "obj" the data passed correctly',function(done){
         let result =joiValidate(obj);
         expect(result.value).to.deep.equal(obj);

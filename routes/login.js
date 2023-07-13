@@ -11,7 +11,7 @@ routes.post("/", (req, res) => {
       //if User doesn't exist in the database
       if (!user) {
         return res.status(404).send({
-          message: "User not found ",
+          message: "User not found",
         });
       }
       // comparing Password

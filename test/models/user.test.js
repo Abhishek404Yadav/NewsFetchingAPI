@@ -5,13 +5,13 @@ const User = require("../../models/user");
 const sinon = require("sinon");
 
 describe("Creating documents in Db", () => {
+  const user = new User({
+    fullName: "Abhishek Yadav",
+    email: "abhiyadav.ce@gmail.com",
+    preferences: ["tesla", "meta", "google"],
+    password: bcrypt.hashSync("Abhishek@2", 5),
+  });
   it("1. Should save the user succesfully in db", (done) => {
-    const user = new User({
-      fullName: "Abhishek Yadav",
-      email: "abhiyadav.ce@gmail.com",
-      preferences: ["tesla", "meta", "google"],
-      password: bcrypt.hashSync("Abhishek@2", 5),
-    });
     expect(user.isNew).equal(true); //isNew will turn false if data saved in the db
     user
       .save()
@@ -50,14 +50,12 @@ describe("Stubbing the user using sinon", () => {
       fullName: "Abhishek Yadav",
       email: "abhiyadav.ce@gmail.com",
     };
+    saveStub.resolves(mockUser);
     // whenever save promise will resolve mockUser will be stored or can say passed in result
     user.save().then(result=>{
         expect(result).to.deep.equal(mockUser);
         expect(saveStub.calledOnce).to.be.true;
         done();
-    }).catch(err=>{
-        done(err);
-    });
-
+    })
   });
 });

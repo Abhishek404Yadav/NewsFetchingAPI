@@ -14,8 +14,10 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+//DB connection
+if(!process.env.NODE_ENV==='test'){
  connectDB();
-
+}
 //Endpoint Handling
 
 app.use("/api/register", register);
@@ -32,3 +34,5 @@ app.listen(process.env.PORT || PORT, (error) => {
     );
   else console.log("Error occurred, server can't start", error);
 });
+
+module.exports=app;

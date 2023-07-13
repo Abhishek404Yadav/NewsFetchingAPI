@@ -19,13 +19,10 @@ before((done) => {
 });
 
 beforeEach((done)=>{
-  console.log("running before Each Testcases");
   mongoose.connection.collections.users.drop(()=>{
     done();
   });
 });
-
-
 
 after((done) => {
   mongoose.disconnect();
