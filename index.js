@@ -6,7 +6,7 @@ const login = require("./routes/login");
 const preferences = require("./routes/preferences");
 const news = require("./routes/news");
 require("dotenv").config();
-const connectDB = require("./config/db");
+const connectDB = require("./connection/db");
 
 const app = express();
 
