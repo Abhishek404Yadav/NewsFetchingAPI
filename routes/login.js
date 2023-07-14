@@ -4,7 +4,7 @@ var User = require("../models/user");
 const routes = require("express").Router();
 const verifyToken = require('../middleware/authenticateToken');
 
-routes.post("/",verifyToken, (req, res) => {
+routes.post("/", (req, res) => {
   User.findOne({
     email: req.body.email,
   })
