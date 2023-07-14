@@ -3,7 +3,11 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const userSchema = new Schema({
   fullName: String,
-  email: String,
+  email: {
+    type: String,
+    unique : [true, "email already exists in database!"],
+    trim: true
+  },
   preferences: [String],
   password: String,
   created: {
@@ -11,7 +15,6 @@ const userSchema = new Schema({
     default: Date.now,
   }
 });
-
 
 const User = mongoose.model("User", userSchema);
 module.exports = User;

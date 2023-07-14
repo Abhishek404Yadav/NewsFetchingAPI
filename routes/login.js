@@ -2,8 +2,9 @@ var jwt = require("jsonwebtoken");
 var bcrypt = require("bcrypt");
 var User = require("../models/user");
 const routes = require("express").Router();
+const verifyToken = require('../middleware/authenticateToken');
 
-routes.post("/", (req, res) => {
+routes.post("/",verifyToken, (req, res) => {
   User.findOne({
     email: req.body.email,
   })

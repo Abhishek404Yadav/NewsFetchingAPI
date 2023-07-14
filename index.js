@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 //DB connection
-if(!process.env.NODE_ENV==='test'){
+if(!(process.env.NODE_ENV==='test')){
  connectDB();
 }
 //Endpoint Handling

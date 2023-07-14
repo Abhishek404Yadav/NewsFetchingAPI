@@ -5,7 +5,7 @@ const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 const server = require('../../index'); 
 
-describe("Preferences Route Testing",()=>{
+describe("News Route Testing",()=>{
     let jwtToken='';
     
     beforeEach(done=>{
@@ -28,30 +28,21 @@ describe("Preferences Route Testing",()=>{
 
     });
 
-    it("1. Succesfully Access to Preferences",done=>{
-        chai.request(server).get("/api/preferences").set('authorization',`JWT ${jwtToken}`).end((err,res)=>{
+    it("1. Succesfully Access to NewsAPI",done=>{
+        chai.request(server).get("/api/news").set('authorization',`JWT ${jwtToken}`).end((err,res)=>{
             expect(res.status).equal(200);
             expect(res.body).to.be.an('object');
-            expect(res.body.preferences).to.be.deep.equal(["tesla","meta","google"]);
+            expect(res.body).to.have.property('news');
             done();
         });       
     });
 
     it("2. Validate if user passed wrong jwt ", (done) => {
-        chai.request(server).get("/api/preferences").set('authorization',`JWT ${jwtToken}bhh`).end((err,res)=>{
+        chai.request(server).get("/api/news").set('authorization',`JWT ${jwtToken}bhh`).end((err,res)=>{
             expect(res.status).equal(403);
             expect(res.body.message).equal("Invalid JWT Token");
+            expect(res.body).to.not.have.property('news');
             done();
         });
       });
-
-    it("3. Succesfully updating the Preferences",done=>{
-        const preferences= {preferences:["tesla","meta","flipkart"]};
-        chai.request(server).put("/api/preferences").set('authorization',`JWT ${jwtToken}`).send(preferences).end((err,res)=>{
-            expect(res.status).equal(200);
-            expect(res.body).to.be.an('object');
-            expect(res.body.preferences).to.be.deep.equal(["tesla","meta","flipkart"]);
-            done();
-        });       
-    });
 });
